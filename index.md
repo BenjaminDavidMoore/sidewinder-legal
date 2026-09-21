@@ -2,45 +2,45 @@
 
 _Effective 09/17/2026 · Version 1.0_
 
-This policy describes what the Sidewinder app does with information, who receives it, and the choices you have. It is written to be read in full in under five minutes. Sidewinder is published by G&R Outdoors ("we", "us"), 200 El Capitan Loop, Dripping Springs, TX 78620. Questions go to grshavor@icloud.com. The current version of this policy is also published at https://benjamindavidmoore.github.io/sidewinder-legal/.
+This policy describes what the Sidewinder app does with information, who receives it, and the choices you have. Sidewinder is published by G&R Outdoors ("we", "us"), 200 El Capitan Loop, Dripping Springs, TX 78620. Questions go to grshavor@icloud.com. The current version of this policy is also published at https://benjamindavidmoore.github.io/sidewinder-legal/.
 
 ## The short version
 
 - Sidewinder has no account, no sign-in, no analytics, no advertising and no server of its own.
-- To score a buck, the app sends your photo and the distance directly from your phone to the AI provider you choose: Anthropic, OpenAI or Google. That provider processes it under its own privacy policy.
-- You supply your own API key for that provider. The key is stored in your phone's secure keychain and sent only to that provider.
-- Everything else, including your scoring history and photos, stays on your phone and is deleted when you delete it or uninstall the app.
+- To score a buck, the app sends your photo and the distance you enter directly from your phone to the AI provider you choose: Anthropic, OpenAI or Google. The AI provider processes it under its own privacy policy.
+- You supply your own API key for that provider. The API key is stored in your phone's secure keychain, and sent only to the AI provider of your choice.
+- Everything else, including your scoring history and photos, stays on your phone, and is deleted when you delete it or uninstall the app.
 
 ## Information the app handles
 
-- Photos you choose to score. Taken with the camera inside the app or picked from your photo library. They are sent to the AI provider you selected, downscaled to that engine's working size, and stored in your on-device history alongside the result.
-- Distance. The number you type, or one read from a rangefinder visible in the photo. Reading the rangefinder happens entirely on the device using Apple Vision on iPhone and Google ML Kit on Android; no text leaves the phone for that step.
-- API keys. One per engine, entered by you in Settings. Kept in iOS Keychain or Android Keystore. Sent only to the provider the key belongs to, in the request that scores a photo. Never sent to us or to anyone else.
-- Display name. Optional. Shown on scores you share from the app. Stored only on the device.
+- Photos. Photos that are taken with your camera inside the app or that you pick from your photo library. The photos are sent to the AI provider you select, downscaled to that engine's working size, and stored in your on-device history alongside the result.
+- Distance. The distance you enter, or the distance read from a rangefinder visible in your photo. Reading the rangefinder happens entirely on the device using Apple Vision on iPhone and Google ML Kit on Android.
+- API keys. You must enter the API key from your phone into Settings for each AI engine. The API key is in iOS Keychain or Android Keystore. The API key is not shared with Sidewinder or shared outside the AI engine.
+- Display name. You have the option of including your phone's Display name on the scores you choose to share from the app.
 - Preferences. Distance units, album preference, selected engine and model, and similar settings. Stored only on the device.
-- Scoring history. Each result, the photos it was scored from, the measurements and the raw exchange with the provider. Stored only on the device. Delete any entry from the History tab.
+- Scoring history. Each photo, distance, score, and any other raw exchange you enter on the app or exchange with the AI engine is stored only on your phone/device. You may delete any entry from the History tab.
 ## Who receives your photos
 
-When you tap Score, the photo, the distance and the measurement instructions go directly from your phone to one of these providers, depending on the engine selected in Settings. Only that provider receives anything.
+When you tap Score, the photo, the distance, and the measurement instructions go directly from your phone to one of these AI providers:
 
 - Anthropic (Claude), api.anthropic.com. Privacy policy: https://www.anthropic.com/privacy
 - OpenAI (ChatGPT), api.openai.com. Privacy policy: https://openai.com/policies/privacy-policy
 - Google (Gemini), generativelanguage.googleapis.com. Privacy policy: https://policies.google.com/privacy
 
-Each provider processes what you send under its own terms and may retain it for a period for abuse monitoring and safety. Because you use your own API key, you are that provider's customer for these requests, and their terms govern retention and use. We never see the request or the response.
+Each provider processes what you send under its own terms and may retain it for a period for abuse monitoring and safety. You are that provider's customer for these requests, and the AI provider's terms govern retention and use.
 
 ## What we do not do
 
-- We do not collect, store or have access to your photos, distances, results, keys or name. There is no Sidewinder server.
-- We do not use analytics, crash reporting, advertising identifiers or any form of tracking.
-- We do not sell or share personal information.
-- We do not knowingly collect information from children under 13, and the app is not directed to them.
+- Sidewinder does not collect, store, or have access to your photos, distances, results, keys or name.
+- Sidewinder does not use analytics, crash reporting, advertising identifiers, or any form of tracking.
+- Sidewinder does not sell or share personal information.
+- Sidewinder does not knowingly collect information from children under 13.
 
 ## Device permissions
 
-- Camera. To photograph a buck inside the app. Requested the first time you open the Score tab, after you have read the disclosure.
-- Photo library, read. To pick an existing photo to score. iOS and Android both use the system picker, so the app only ever sees the photo you choose.
-- Photo library, add. To save a photo you took in the app to your album, only when you choose to.
+- Camera. To photograph a buck inside the app, you must grant permission to access the camera. Permission is requested the first time you open the Score tab, after you have read the disclosure.
+- Photo library. To pick an existing photo from your phone to score, iOS and Android both use the system picker. Sidewinder only sees the photo you choose.
+- Photo library. You may choose to save a photo you took in the app to your album.
 
 ## Retention and deletion
 
@@ -55,7 +55,7 @@ Requests to AI providers use HTTPS. API keys are held in the platform's secure s
 
 ## Your rights
 
-Because we hold no personal information about you, there is nothing for us to access, correct, export or delete on your behalf. Rights over data sent to an AI provider are exercised with that provider. If you believe we do hold information about you, contact grshavor@icloud.com and we will respond within 30 days.
+Sidewinder does not maintain any personal information about you. Rights over data sent to an AI provider are exercised with that provider.
 
 ## The score
 
@@ -75,6 +75,14 @@ Sidewinder uses no Anthropic, OpenAI or Google software in the app itself; it ca
 ## Changes to this policy
 
 When this policy changes in substance, the in-app disclosure will be shown again on next launch and the version and effective date above will be updated. Continued use after that constitutes acceptance.
+
+## Disputes
+
+Governing Law: Use of the Sidewinder App, and all claims or disputes arising out of or relating to it, shall be governed by and construed in accordance with the laws of the State of Texas.
+
+Negotiation and Mediation: If a dispute arises, the parties agree first to try to resolve it through direct good-faith discussions. If the dispute is not resolved within 30 days, the parties agree to submit the dispute to mediation under the rules of the Texas Alternative Dispute Resolution Act.
+
+Binding Arbitration: If mediation fails to resolve the dispute within 60 days of selection of a mediator, any remaining controversy shall be settled by binding arbitration in Hays County, Texas, before a single arbitrator.
 
 ## Contact
 
