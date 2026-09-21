@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sidewinder Field Guide</title>
+<meta name="description" content="How to set up and use Sidewinder, the whitetail antler-scoring app: install, get an API key, score a buck, and every setting explained.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Besley:wght@400;600;700&family=Archivo:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<!--
+  HOW THIS PAGE IS PUT TOGETHER
+  - Each chapter is one <section class="page" id="…" data-title="…" data-short="…">.
+    guide.js builds the sidebar, the chip row on phones, and the Previous/Next
+    buttons from those sections, in the order they appear here.
+  - Building blocks (all styled in guide.css):
+      <ol class="steps">       numbered steps, each <li><div><span class="t">title</span><span class="d">detail</span></div></li>
+      <div class="note">       callout; add "warn" or "danger" for amber / red
+      <div class="tablewrap">  wraps a <table> so it can scroll sideways on a phone
+      <div class="knobs">      the settings ledger: one <div class="knob"> per setting
+      <div class="faq">        collapsible questions, one <details> each
+      <div class="phone">      the small drawn phone screens (no image files)
+  - The version line in the masthead is the "mast-kicker" div just below.
+-->
+
+<header class="mast">
+  <div class="mast-inner">
+    <div class="mast-row">
+      <div class="mast-title">
+        <span class="wordmark" aria-label="Sidewinder">
+          <span class="word">SIDEWINDER</span>
+          <svg class="ruler" viewBox="0 0 160 10" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="0" y1="1" x2="160" y2="1" stroke="currentColor" stroke-width="1.5"/>
+            <g stroke="currentColor" stroke-width="1">
+              <line x1="0" y1="1" x2="0" y2="9"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="20" y1="1" x2="20" y2="6"/><line x1="30" y1="1" x2="30" y2="4"/>
+              <line x1="40" y1="1" x2="40" y2="9"/><line x1="50" y1="1" x2="50" y2="4"/><line x1="60" y1="1" x2="60" y2="6"/><line x1="70" y1="1" x2="70" y2="4"/>
+              <line x1="80" y1="1" x2="80" y2="9"/><line x1="90" y1="1" x2="90" y2="4"/><line x1="100" y1="1" x2="100" y2="6"/><line x1="110" y1="1" x2="110" y2="4"/>
+              <line x1="120" y1="1" x2="120" y2="9"/><line x1="130" y1="1" x2="130" y2="4"/><line x1="140" y1="1" x2="140" y2="6"/><line x1="150" y1="1" x2="150" y2="4"/><line x1="160" y1="1" x2="160" y2="9"/>
+            </g>
+          </svg>
+        </span>
+        <h1>Field Guide for new hunters</h1>
+      </div>
+      <div class="mast-kicker">Sidewinder 1.0 · September 2026</div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Chapters">
+    <div class="toc-head label">Chapters</div>
+    <ol id="toc"></ol>
+    <div class="toc-foot">Work through the chapters in order the first time. After that, the Settings chapter is the one you will come back to.<br><br><a href="../">Privacy policy</a></div>
+  </nav>
+
+  <main>
+    <div class="chipnav" id="chipnav" aria-label="Chapters"></div>
+
+    <!-- ============================================================ 1 -->
+    <section class="page" id="start" data-title="Start here" data-short="Start">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 1</span>
+        <h2>What Sidewinder does, and what you need before you begin</h2>
+        <p class="lede">Sidewinder takes a photo of a whitetail buck and gives you a Boone &amp; Crockett style score in under a minute. This guide gets you from nothing installed to your first scored buck.</p>
+      </div>
+
+      <div class="prose">
+        <p>You point the camera at a buck, tap the shutter, type the distance if you know it, and tap <strong>Score this buck</strong>. The app sends the photo to an AI model of your choosing. The model measures the rack (beams, tines, spread and mass) and Sidewinder adds those measurements up the way an official scorer would. You get a gross score, a range of uncertainty, and a full breakdown you can read line by line.</p>
+
+        <div class="note warn">
+          <span class="label">Read this once</span>
+          <p>Every score is an <strong>estimate</strong>, not an official Boone &amp; Crockett measurement. Official scores need a certified measurer and a 60-day drying period. Use Sidewinder to decide whether a buck is worth a closer look, not to enter one in a record book. Sidewinder is not affiliated with or endorsed by the Boone and Crockett Club.</p>
+        </div>
+
+        <h3>How the AI part works, in plain terms</h3>
+        <p>Sidewinder has no server and no account of its own. There is nothing to sign up for and nothing to sign in to. Instead it talks directly to one of three AI companies on your behalf: Anthropic (makers of Claude), OpenAI (makers of ChatGPT), or Google (makers of Gemini). To do that it needs an <strong>API key</strong> from one of them. Think of an API key as a long password that lets an app use your account with that company. You pay that company directly for what you use, and the amounts are small: typically a few cents per score, depending on which model you pick. The app shows you the cost before you score anything.</p>
+        <p>You only need <strong>one</strong> of the three. All three work the same way in the app. This guide recommends Claude, because it is the app's default and the engine the app has been tested against the most.</p>
+
+        <h3>What you need</h3>
+        <ul class="check">
+          <li>A phone with a working camera. This guide shows the iPhone; the Android app has the same screens.</li>
+          <li>About 15 minutes for setup. Most of that is creating an account with the AI company and adding a small amount of credit.</li>
+          <li>A payment card for the AI company. Anthropic and OpenAI want prepaid credit before a key will work. Google has a free tier that is often enough to try the app.</li>
+          <li>Optional but helpful: a laser rangefinder. If the distance readout is visible in the photo, Sidewinder reads it for you.</li>
+        </ul>
+
+        <h3>The setup, in order</h3>
+        <ol>
+          <li>Install the app (Chapter 2).</li>
+          <li>Open it and read the two first-launch screens (Chapter 3).</li>
+          <li>Create an account with one AI company and get an API key (Chapter 4).</li>
+          <li>Paste the key into Sidewinder, which tests it for you (Chapter 5).</li>
+          <li>Score your first buck (Chapter 6).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================ 2 -->
+    <section class="page" id="install" data-title="Install the app" data-short="Install">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 2</span>
+        <h2>Installing the app</h2>
+        <p class="lede">While Sidewinder is in testing, iPhone users install it through Apple's TestFlight app, which works like a small private App Store. Once it is released, it installs from the App Store or Google Play like any other app and you can skip to Chapter 3.</p>
+      </div>
+
+      <div class="prose">
+        <h3>iPhone, through TestFlight</h3>
+        <ol class="steps">
+          <li><div>
+            <span class="t">Install TestFlight from the App Store</span>
+            <span class="d">Open the App Store on your iPhone, search for <strong>TestFlight</strong> (the icon is a blue circle with a white propeller), and install it. It is free and made by Apple. Sign in with your Apple ID if it asks.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Accept your invitation</span>
+            <span class="d">You will get the invite one of two ways. <strong>By email:</strong> look for a message from TestFlight inviting you to test <strong>Sidewinder Scoring</strong> and tap <strong>View in TestFlight</strong> on your iPhone. <strong>By link:</strong> the person who invited you may send a link that starts with <code>testflight.apple.com/join/</code>. Open it on your iPhone and it will jump straight into TestFlight.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Tap Accept, then Install</span>
+            <span class="d">TestFlight lists the app as <strong>Sidewinder Scoring</strong>, with an Accept button. Tap it, then tap <strong>Install</strong>. The icon on your home screen is labelled <strong>Sidewinder</strong>.</span>
+          </div></li>
+        </ol>
+
+        <h3>Android</h3>
+        <p>Android testers are sent a Google Play testing link by the person who invited them. Open it on your phone, accept, and install from Google Play as usual.</p>
+
+        <h3>Permissions the app asks for</h3>
+        <p>Nothing is asked until you reach the Score tab, after the two first-launch screens in Chapter 3. Then your phone asks for <strong>camera</strong> access. Tap <strong>Allow</strong>. Without it you can still score photos from your photo library, but not shoot new ones from inside the app. The first time you take a shot, Sidewinder also asks whether to save photos to your album. That one is your choice and is explained in Chapter 7. The microphone is never used.</p>
+
+        <h3>Keeping it up to date</h3>
+        <p>During testing, new builds arrive through TestFlight, not the App Store. When one is available, TestFlight shows an <strong>Update</strong> button next to the app, and by default it also sends you a notification. You do not need to reinstall or re-enter your API keys after an update. Your keys and your scoring history stay on the phone.</p>
+
+        <div class="note">
+          <span class="label">Builds expire</span>
+          <p>Apple retires every TestFlight build 90 days after it is uploaded. If the app suddenly refuses to open and TestFlight says the build has expired, install the newest one from TestFlight. If there is none, tell the person who invited you.</p>
+        </div>
+
+        <h3>Sending feedback</h3>
+        <p>Because this is a TestFlight app, taking a screenshot inside Sidewinder pops up a <strong>Share Beta Feedback</strong> option. That sends the screenshot and your note straight to the developer, which is the fastest way to report something that looks wrong. If a score seems off, the most useful thing you can send is the Breakdown page from Chapter 6, which shows exactly what the model measured.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 3 -->
+    <section class="page" id="firstlaunch" data-title="First launch" data-short="First launch">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 3</span>
+        <h2>The two screens you see first</h2>
+        <p class="lede">There is no sign-in. The first time you open Sidewinder it shows two screens before the camera: one that tells you where your photos go, and one that gets a key into the app.</p>
+      </div>
+
+      <div class="prose">
+        <ol class="steps">
+          <li><div>
+            <span class="t">"Before you score"</span>
+            <span class="d">A plain-language summary of what leaves your phone and what stays on it. In short: the photos you choose to score, the distance, and the measuring instructions go to the one AI company you picked, and nowhere else. Your name, your location, the rest of your photo library and your scoring history are never sent. Your history lives only on the phone. Read it, then tap <strong>I understand — continue</strong>. It is shown once, and again only if what the app sends ever changes.</span>
+          </div></li>
+          <li><div>
+            <span class="t">"Bring your own key"</span>
+            <span class="d">This is where the API key goes. If you do not have one yet, leave the app on this screen and do Chapter 4, then come back for Chapter 5. The screen has folded-up instructions of its own under <strong>How to obtain an API key</strong> and <strong>How to add funds</strong> if you would rather follow along on the phone.</span>
+          </div></li>
+        </ol>
+
+        <div class="note">
+          <span class="label">Skipping</span>
+          <p>You can tap <strong>Skip for now</strong> to look around without a key. The Score tab will not work until a key is added, and the "Bring your own key" screen comes back each time you open the app until one is. Everything on it is also in Settings → Keys.</p>
+        </div>
+
+        <h3>Reading these again later</h3>
+        <p>Settings → General → <strong>How your photos are used</strong> reopens the first screen. The full <strong>Privacy policy</strong> is the row below it, and is also published <a href="../">on this site</a>.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 4 -->
+    <section class="page" id="keys" data-title="Get an API key" data-short="API keys">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 4</span>
+        <h2>Creating an AI account and getting an API key</h2>
+        <p class="lede">This is the one part of setup that happens outside the app. Pick one company, do its section, and skip the other two. You can always add the others later.</p>
+      </div>
+
+      <div class="prose">
+        <div class="note danger">
+          <span class="label">An API key is a password</span>
+          <p>Anyone who has your key can spend your money. Never paste it into a text message, email, or group chat. Never screenshot it. The only place it should go is Sidewinder, where it is stored in the phone's encrypted keychain. Each company lets you delete ("revoke") a key with one click if you think it leaked, and make a new one.</p>
+        </div>
+
+        <h3>Which one should I pick?</h3>
+        <div class="vendors wide">
+          <div class="vendor">
+            <span class="vn">Claude</span>
+            <span class="vs">By Anthropic · the default</span>
+            <span class="pill">Recommended</span>
+            <p>The app's default engine and the one it has been tested against the most.</p>
+            <div class="kv"><b>Key looks like</b><code>sk-ant-…</code><b>Website</b><span>console.anthropic.com</span><b>Billing</b><span>Prepaid credit</span></div>
+          </div>
+          <div class="vendor">
+            <span class="vn">ChatGPT</span>
+            <span class="vs">By OpenAI</span>
+            <p>A reasonable second option. Its smallest model, GPT-5.6 Luna, is very cheap.</p>
+            <div class="kv"><b>Key looks like</b><code>sk-…</code><b>Website</b><span>platform.openai.com</span><b>Billing</b><span>Prepaid credit</span></div>
+          </div>
+          <div class="vendor">
+            <span class="vn">Gemini</span>
+            <span class="vs">By Google</span>
+            <p>Has a free tier, so it is the cheapest way to try the app before spending anything.</p>
+            <div class="kv"><b>Key looks like</b><code>AIza…</code><b>Website</b><span>aistudio.google.com</span><b>Billing</b><span>Free tier, then a Google Cloud card</span></div>
+          </div>
+        </div>
+
+        <div class="note">
+          <span class="label">Subscriptions are not the same thing</span>
+          <p>A Claude.ai subscription, ChatGPT Plus, or a Google One AI plan does <strong>not</strong> give you an API key. Those are chat products. The API is a separate, pay-as-you-go account at each company, even if you sign in with the same email. Do all of this on a computer if you can, since the websites are easier on a big screen. To get the key onto your phone without emailing it to yourself, save it in a password manager that syncs (iCloud Passwords, 1Password) or type it in by hand.</p>
+        </div>
+
+        <div class="note">
+          <span class="label">The app has the addresses</span>
+          <p>Inside Sidewinder, the <strong>How to obtain an API key</strong> and <strong>How to add funds</strong> rows each end with the exact web address and a <strong>Copy</strong> button. The addresses are not tappable links on purpose. Copy one and paste it into your browser.</p>
+        </div>
+
+        <h3>Option A · Claude (Anthropic)</h3>
+        <ol class="steps">
+          <li><div>
+            <span class="t">Create an account</span>
+            <span class="d">Go to <strong>console.anthropic.com</strong> and sign in, or create an account, which is free. If it asks for an organization name, put your own name.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Add credit</span>
+            <span class="d">Go to <strong>Settings</strong>, then <strong>Billing</strong>. Add a card, then buy a small amount of credit. Five dollars covers a lot of bucks. A key with no credit behind it will fail the app's key test with a message saying so.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Create a key</span>
+            <span class="d">Go to <strong>Settings</strong>, then <strong>API keys</strong>, and press <strong>Create Key</strong>. Name it <strong>Sidewinder</strong> so you can recognize it later.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Copy it now</span>
+            <span class="d">The full key is shown <strong>once</strong>. It starts with <code>sk-ant-</code> and is very long. Copy it before you close the box. If you miss it, delete that key and make a new one. Then go to Chapter 5.</span>
+          </div></li>
+        </ol>
+        <div class="note warn">
+          <span class="label">If you plan to try Claude Fable 5.1</span>
+          <p>The app lists Fable 5.1 as Anthropic's top model, at twice the price of Opus 5. It only works on Anthropic accounts with the standard 30-day data retention setting. If your organization is set to zero data retention, every request to Fable fails. Leave the model on Claude Opus 5 unless you know your account is set up for it.</p>
+        </div>
+
+        <h3>Option B · ChatGPT (OpenAI)</h3>
+        <ol class="steps">
+          <li><div>
+            <span class="t">Open the platform site</span>
+            <span class="d">Go to <strong>platform.openai.com</strong> and sign in with your OpenAI account, or create one. An existing ChatGPT login works, but the platform side has its own billing.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Add credit</span>
+            <span class="d">Go to <strong>Settings</strong>, then <strong>Billing</strong>. Add a payment method and buy credit. New accounts start at zero and every request fails until there is a balance.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Create a key</span>
+            <span class="d">Open the <strong>API keys</strong> page and press <strong>Create new secret key</strong>. Leave the permissions at <strong>All</strong>. A restricted key often cannot reach the model.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Copy it now</span>
+            <span class="d">The key starts with <code>sk-</code> and is shown once. Copy it, then go to Chapter 5.</span>
+          </div></li>
+        </ol>
+
+        <h3>Option C · Gemini (Google)</h3>
+        <ol class="steps">
+          <li><div>
+            <span class="t">Open Google AI Studio</span>
+            <span class="d">Go to <strong>aistudio.google.com</strong> and sign in with any Google account. Accept the terms when it asks.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Create a key</span>
+            <span class="d">Press <strong>Get API key</strong>, then <strong>Create API key</strong>. Pick an existing Google Cloud project or let it make one for you. The key starts with <code>AIza</code>.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Decide about billing</span>
+            <span class="d">The free tier often works with no card at all, at a slower rate limit. For the higher limits, find your project on the API key page and press <strong>Set up billing</strong>, which takes you into Google Cloud. The app's cost figures assume paid rates.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Copy it</span>
+            <span class="d">Copy the key it shows you, then go to Chapter 5.</span>
+          </div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================ 5 -->
+    <section class="page" id="addkey" data-title="Add the key to the app" data-short="Add key">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 5</span>
+        <h2>Putting the key into Sidewinder</h2>
+        <p class="lede">On first launch the key goes into the "Bring your own key" screen, which tests it before it is saved. Later on, keys live in Settings → Keys. Either way the key goes only to the company it belongs to and is kept in your phone's keychain.</p>
+      </div>
+
+      <div class="prose">
+        <div class="phones wide">
+          <figure class="figure">
+            <div class="phone">
+              <div class="bar"><span class="wm" style="font-size:17px">SIDEWINDER</span></div>
+              <div class="setting" style="border:none;padding-bottom:2px"><span class="score" style="font-size:17px">Bring your own key</span><div class="h">Sidewinder has no server and no account. It measures a rack by asking an AI provider directly, on your key and your credit…</div></div>
+              <div class="setting"><span class="stamp">PROVIDER</span><div class="segw"><span class="on">Claude</span><span>ChatGPT</span><span>Gemini</span></div></div>
+              <div class="setting"><div class="l"><span>Model</span><span class="v">Claude Opus 5 ›</span></div><div class="h">Roughly up to $0.91 per score at full image size.</div></div>
+              <div class="setting"><div class="l"><span>Anthropic API key</span></div><div class="keybox"><span style="color:var(--faint)">sk-ant-…</span><span class="kc">PASTE</span></div><div class="h">Tested against Anthropic before it is saved.</div></div>
+              <div class="acc">How to obtain an API key</div>
+              <div class="acc">How to add funds</div>
+              <div style="display:flex;gap:6px;padding:8px 14px 12px"><div class="cta" style="margin:0;flex:1;background:transparent;border:1px solid var(--rule);color:var(--ink)">Skip for now</div><div class="cta" style="margin:0;flex:1;opacity:.45">Start scoring</div></div>
+            </div>
+            <figcaption>Fig. 1 — "Bring your own key", before a key is added</figcaption>
+          </figure>
+        </div>
+
+        <h3>On first launch</h3>
+        <ol class="steps">
+          <li><div>
+            <span class="t">Pick the provider</span>
+            <span class="d">Under <strong>Provider</strong>, tap Claude, ChatGPT or Gemini to match the key you made. The key field's label changes to match: <strong>Anthropic API key</strong>, <strong>OpenAI API key</strong> or <strong>Google AI API key</strong>.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Leave the model alone, for now</span>
+            <span class="d">The <strong>Model</strong> row is set to that company's recommended model, with the most a single score could cost underneath. You can change it here or later in Settings. The key is tested against whichever model is showing.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Paste the key and tap Save key</span>
+            <span class="d">Tap the paste button at the end of the field, or long-press and choose Paste. The Save button lights up once the key is long enough to be real. <strong>Saving is a test:</strong> the app asks the company a one-word question on your key, which costs a fraction of a cent. Nothing is stored until the company answers.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Read the verdict</span>
+            <span class="d">"That key works" means it is saved. The provider's button gets a ✓ and the row now shows the first and last few characters with the middle hidden, and a small <strong>KEYCHAIN</strong> tag. If the test fails, the message tells you which problem it is: a mistyped key, an account with no credit, a key that cannot reach that model, or no signal. Fix it and tap Save key again.</span>
+          </div></li>
+          <li><div>
+            <span class="t">Tap Start scoring</span>
+            <span class="d">The button lights up as soon as one key is saved. The engine with a key becomes the engine the app uses. If you add keys for two or more, a <strong>Default provider</strong> picker appears at the bottom so you can choose.</span>
+          </div></li>
+        </ol>
+
+        <h3>Adding or changing a key later</h3>
+        <p>Go to <strong>Settings → Keys</strong>. Each of the three companies has its own block with a status tag, the key row, and the same two folded how-tos. Tap <strong>Add</strong> (or <strong>Edit</strong>), paste, and tap <strong>Save key</strong>. In Settings, saving does not test the key on its own, so tap <strong>Test</strong> afterward. It asks the company whether the key works on the model you have picked.</p>
+        <ul>
+          <li><strong>Copy</strong> puts the saved key on the clipboard for 60 seconds, then clears it automatically so it does not linger where another app could read it.</li>
+          <li><strong>Delete</strong> appears when you tap Edit on a saved key. The app asks first, because the company showed you that key only once. Deleting it from the phone does not revoke it. Do that on the company's website.</li>
+          <li>To score with a different company, add its key here, then pick it under <strong>Settings → Scoring → Scoring engine</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ 6 -->
+    <section class="page" id="score" data-title="Score a buck" data-short="Scoring">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 6</span>
+        <h2>Scoring your first buck</h2>
+        <p class="lede">Take or pick a photo, add the distance if you know it, and tap one button. A mounted rack or a clear trail-camera photo from your library is a good first test.</p>
+      </div>
+
+      <div class="prose">
+        <h3>The three tabs</h3>
+        <p>Along the bottom of every screen: <strong>Score</strong> (the camera and the way in), <strong>History</strong> (every buck you have scored on this phone), and <strong>Settings</strong>. You can switch tabs mid-way through and nothing is lost. A half-typed distance is still there when you come back.</p>
+
+        <h3>The Score tab, piece by piece</h3>
+        <div class="phones wide">
+          <figure class="figure">
+            <div class="phone">
+              <div class="bar"><span class="wm">SIDEWINDER</span><span class="sec">SCORE</span></div>
+              <div class="strip"><span class="thumb p"></span><span class="thumb"></span><span class="count">2 OF 3</span></div>
+              <div class="glass">
+                <div class="zoomrow"><span>.5×</span><span class="on">1×</span><span>3×</span><em>OPTICAL ZOOM ONLY</em></div>
+                <div class="guide" style="inset:40px 22px 70px"></div>
+                <div class="framing">Another angle helps — broadside shows the beams, head on shows the spread.</div>
+                <div class="row"><span class="side sq">LIB</span><span class="shutter"></span><span class="blank"></span></div>
+              </div>
+              <div class="ledger">
+                <div class="r"><span>Distance to deer</span><span class="v">142 yds</span></div>
+                <span style="text-align:right"><span class="chip">AUTO-DETECTED</span></span>
+              </div>
+              <div class="cta">Score this buck</div>
+              <div class="tabs"><span class="on">SCORE</span><span>HISTORY</span><span>SETTINGS</span></div>
+            </div>
+            <figcaption>Fig. 2 — The Score tab with two photos gathered</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="phone">
+              <div class="bar"><span class="wm">← SIDEWINDER</span><span class="sec">JUST NOW</span></div>
+              <div class="strip" style="height:60px;background:var(--stamp)"><span class="stamp">PHOTO 1 · PHOTO 2</span></div>
+              <div class="ledger">
+                <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 8px"><span class="stamp" style="color:var(--muted)">GROSS · ESTIMATE</span><span class="stamp" style="font-size:7px">CLAUDE · 14 S · 142 YDS</span></div>
+                <div class="r" style="border:none;justify-content:flex-start;gap:10px"><span class="score">154 6/8"</span><span class="v">± 6 4/8"</span></div>
+                <div class="two"><div><span class="stamp">CONFIDENCE</span><span class="big" style="color:var(--warn)">62%</span></div><div><span class="stamp">ESTIMATED AGE</span><span class="big">4½–5½ <small style="font-family:var(--ui);font-weight:400;font-size:9px">yrs</small></span></div></div>
+                <div class="scale"><span>GROW</span><span>SHOOTER</span><span class="on">PRIZE</span><span class="half">TROPHY</span><span class="half">RECORD</span></div>
+                <span class="stamp">MODEL NOTES</span>
+                <span style="font-size:9.5px;color:var(--muted);line-height:1.45">Eight scorable points, four per side. G4 on the right is short and partly hidden…</span>
+              </div>
+              <div class="cta" style="background:transparent;border:1px solid var(--rule);color:var(--ink)">See the breakdown</div>
+              <div class="cta">Score another buck</div>
+            </div>
+            <figcaption>Fig. 3 — A result. The numbers are an example</figcaption>
+          </figure>
+        </div>
+
+        <ul>
+          <li><strong>The viewfinder</strong> fills the screen. A caption on it tells you how to frame the buck. Head on or from behind gives the best view of the spread. A broadside shot shows the beams and tines. Once you have one photo, the caption changes to suggest a different angle.</li>
+          <li><strong>Zoom chips</strong> (.5×, 1×, 3×) sit at the top left of the viewfinder, beside an <strong>Optical zoom only</strong> tag. Only the lenses your phone actually has are shown, and the app never goes past optical zoom. Digital zoom makes a rack measure badly, so it is deliberately not offered.</li>
+          <li><strong>Shutter</strong> in the middle takes a photo. <strong>Library</strong> on the left picks one from your camera roll.</li>
+          <li><strong>The photo strip</strong> appears above the viewfinder once you have a photo. You can gather <strong>up to three photos of the same buck</strong>. Tap a thumbnail to look at it, tap the × to drop it, and tap <strong>Back to camera</strong> to shoot another. The first photo is the primary one. More than three angles stops adding evidence and starts adding cost.</li>
+          <li><strong>Distance to deer</strong> is a single row with a number and its unit. Tap the unit to switch between yards and meters. It is optional. If you leave it blank the model estimates the range, and the result will say "est. range". A known distance makes the scale more reliable. If you shot the photo through a rangefinder and the readout is visible in the frame, Sidewinder reads the number for you and tags it <strong>Auto-detected</strong>. That reading happens on the phone. Typing over it replaces it with yours, and the tag changes to <strong>Manual</strong>.</li>
+          <li><strong>Score this buck</strong> appears once you have a photo, and sends everything off. If no key is set for the chosen engine, this is where you will be told to add one in Settings.</li>
+        </ul>
+
+        <h3>The wait</h3>
+        <p>The scoring screen shows your lead photo, a progress bar that moves through <strong>Uploading</strong>, <strong>Processing</strong> and <strong>Receiving</strong>, and a clock. On the default settings expect well under a minute. It takes longer with more photos, and noticeably longer with Look closer turned on (Chapter 7). <strong>Cancel</strong> stops the run. If the model returns something garbled the app quietly tries once more. If it fails outright you get the reason in plain words, with <strong>Back</strong> and <strong>Retry</strong> buttons.</p>
+
+        <h3>Reading the result</h3>
+        <ul>
+          <li><strong>Gross · Estimate</strong> is the headline: the gross typical score in inches, written the scorer's way in eighths (154 6/8", not 154.75). Beside it is the <strong>tolerance</strong>, how far off the model thinks it could be. Plus or minus six inches on a 150-inch buck is a solid estimate. The small line at the top right names the engine, how long it took, and the distance used.</li>
+          <li><strong>Confidence</strong> is the model's own sense of how well it could see the rack. Green (70% and up) is good, amber means take it with a grain of salt, red (under 40%) means the photo did not show enough.</li>
+          <li><strong>Estimated age</strong> is a bracket in half years (4½–5½), the way a biologist writes it.</li>
+          <li><strong>The class scale</strong> is a ruler from 100 to 180 inches with a marker where this buck falls: <strong>Grow</strong> (100–120), <strong>Shooter</strong> (120–140), <strong>Prize</strong> (140–160), <strong>Trophy</strong> (160–170) and <strong>Record</strong> (170 and up), with a one-line summary underneath.</li>
+          <li><strong>Model notes</strong> is the model telling you, in a sentence or two, what it saw and which number it is least sure of.</li>
+        </ul>
+
+        <h3>The breakdown</h3>
+        <p>Tap <strong>See the breakdown</strong> to see the working. It has gross, deductions and net at the top, every measurement in inches (spread, both beams, each tine, each circumference), the <strong>B&amp;C typical formula</strong> spelled out with your numbers in it, a <strong>How B&amp;C scoring works</strong> button that opens a short guide with a labelled antler diagram, and a <strong>Scale &amp; distance</strong> block saying whether the range was yours or estimated, the model's confidence and why, and the tolerance. When a score seems wrong, this is the page to look at first, and the page to send as feedback.</p>
+
+        <h3>History</h3>
+        <p>Every score is kept on the phone: the photos you sent, the prompt that went with them, and what came back. Each row shows the date, the engine and the distance. Tap one to reopen it exactly as it was. Swipe a row to the left to delete it. The app asks you to confirm, and the photo and the saved response go with it.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 7 -->
+    <section class="page" id="settings" data-title="Every setting explained" data-short="Settings">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 7</span>
+        <h2>Every knob and lever in Settings</h2>
+        <p class="lede">Settings has three tabs. Scoring holds everything that decides how a buck is measured and what it costs, with the cost pinned at the bottom of the screen. Keys holds your three accounts. General is the app's own preferences.</p>
+      </div>
+
+      <div class="prose wide">
+        <div class="phones">
+          <figure class="figure">
+            <div class="phone">
+              <div class="bar"><span class="wm">SIDEWINDER</span><span class="sec">SETTINGS</span></div>
+              <div class="stabs"><span class="on">SCORING</span><span>KEYS</span><span>GENERAL</span></div>
+              <div class="setting"><div class="l"><span>Scoring engine</span></div><div class="segw"><span class="on">Claude</span><span>ChatGPT</span><span>Gemini</span></div><div class="h">Every score goes to Claude. Image size and cost below follow it.</div></div>
+              <div class="setting"><div class="l"><span>Model</span><span class="v">Claude Opus 5 ›</span></div></div>
+              <div class="setting"><div class="l"><span>Max image size</span><span class="v">1568 px</span></div><div class="slider"><i></i><b></b></div></div>
+              <div class="setting"><div class="l"><span>Look closer</span><span class="seg"><span class="on">Off</span><span>2</span><span>4</span><span>6</span></span></div></div>
+              <div class="setting"><div class="l"><span>Measurement prompt</span></div><div class="promptbox">You are an expert Boone &amp; Crockett (B&amp;C) scorer. From one or more photographs of the same whitetail buck…</div></div>
+              <div class="foot"><span class="what">Cost per score<small>Claude Opus 5, typically about $0.05</small></span><span class="amt">up to <b>$0.915</b> ⌃</span></div>
+              <div class="tabs"><span>SCORE</span><span>HISTORY</span><span class="on">SETTINGS</span></div>
+            </div>
+            <figcaption>Fig. 4 — The Scoring tab, with the cost pinned underneath</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="phone">
+              <div class="bar"><span class="wm">SIDEWINDER</span><span class="sec">SETTINGS</span></div>
+              <div class="stabs"><span>SCORING</span><span class="on">KEYS</span><span>GENERAL</span></div>
+              <div class="setting"><div class="acct"><b>Claude</b><span class="status ok">SCORING WITH THIS</span></div><div class="h">Anthropic API key</div><div class="keybox"><span>sk-ant-••••••••••3f9a</span><span class="kc">KEYCHAIN</span></div><div class="acts"><span>Edit</span><span>Copy</span><span class="test">Test</span></div></div>
+              <div class="acc">How to obtain an API key</div>
+              <div class="acc">How to add funds</div>
+              <div class="setting"><div class="acct"><b>ChatGPT</b><span class="status">NO KEY</span></div><div class="h">OpenAI API key</div><div class="keybox"><span style="color:var(--faint)">No key set</span></div><div class="acts"><span>+ Add</span></div></div>
+              <div class="acc">How to obtain an API key</div>
+              <div class="tabs"><span>SCORE</span><span>HISTORY</span><span class="on">SETTINGS</span></div>
+            </div>
+            <figcaption>Fig. 5 — The Keys tab: one block per company</figcaption>
+          </figure>
+        </div>
+
+        <h3>Scoring tab</h3>
+        <p style="max-width:66ch">From the top: Scoring engine, Model, Max image size, Look closer and the Measurement prompt, with <strong>Cost per score</strong> pinned to the bottom of the screen so you can watch it move as you change things. Everything is saved the moment you change it.</p>
+
+        <div class="knobs">
+          <div class="knob">
+            <div class="name"><b>Scoring engine</b><span class="where">Scoring · top</span><span class="def">Default: Claude, or whichever engine you added a key for</span></div>
+            <div class="body"><p>Which AI company scores your photos: Claude, ChatGPT or Gemini. Every score goes to the one picked here, using that engine's model, image size and key. If you pick an engine that has no key, a notice appears right under the picker with an <strong>Add key</strong> button that takes you to the right spot on the Keys tab. Switch engines to compare them on the same buck.</p></div>
+          </div>
+
+          <div class="knob">
+            <div class="name"><b>Model</b><span class="where">Scoring · one per engine</span><span class="def">Default: the first in each list</span></div>
+            <div class="body">
+              <p>Which of that company's models does the measuring. The picker shows each model's price per million tokens and the most a score could cost on it. Bigger models see finer detail (tine tips, the far side of the rack) and cost more. Each engine remembers its own choice.</p>
+              <div class="tablewrap">
+                <table>
+                  <thead><tr><th>Engine</th><th>Models, in the app's order</th><th>Guidance</th></tr></thead>
+                  <tbody>
+                    <tr><td class="k">Claude</td><td>Claude Opus 5 (default) · Claude Fable 5.1 · Claude Sonnet 5 · Claude Haiku 4.5</td><td>Opus 5 is the tested default. Fable 5.1 is the top tier at twice the price and needs an account on 30-day data retention. Sonnet is the budget choice. Haiku is cheapest and noticeably rougher.</td></tr>
+                    <tr><td class="k">ChatGPT</td><td>GPT-5.6 Sol (default) · GPT-6 Astra · GPT-5.6 Terra · GPT-5.6 Luna</td><td>Sol for real use. Astra is OpenAI's top tier at two and a half times the price. Terra is the budget choice. Luna is very cheap for trying things.</td></tr>
+                    <tr><td class="k">Gemini</td><td>Gemini 3.1 Pro (default) · Gemini 3.8 Flash</td><td>Pro for real use. Flash is quick and cheap.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>A key that works on one model may not reach another, so after changing the model it is worth tapping <strong>Test</strong> on the Keys tab.</p>
+            </div>
+          </div>
+
+          <div class="knob">
+            <div class="name"><b>Max image size</b><span class="where">Scoring · slider · one per engine</span><span class="def">Default: each engine's ceiling</span></div>
+            <div class="body">
+              <p>The long edge, in pixels, that every photo is shrunk to before it is sent. Slide it down to save money, up for detail. The text under the slider tells you the trade-off: fine tine tips need roughly 1,200 px or more.</p>
+              <div class="tablewrap">
+                <table>
+                  <thead><tr><th>Engine</th><th>Range</th><th>How size affects cost</th></tr></thead>
+                  <tbody>
+                    <tr><td class="k">Claude</td><td class="m">512 – 1568 px</td><td>Cost grows with the area of the image. Anthropic degrades anything larger than the ceiling.</td></tr>
+                    <tr><td class="k">ChatGPT</td><td class="m">512 – 2048 px</td><td>Cost grows with the area of the image, up to a cap per photo.</td></tr>
+                    <tr><td class="k">Gemini</td><td class="m">512 – 3072 px</td><td>Google bills every photo the same, whatever its size, so there is no saving from sliding it down.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>Leave it at the ceiling unless cost matters more than accuracy.</p>
+            </div>
+          </div>
+
+          <div class="knob">
+            <div class="name"><b>Look closer</b><span class="where">Scoring · Off / 2 / 4 / 6</span><span class="def">Default: Off</span></div>
+            <div class="body">
+              <p>How many times the model is allowed to zoom in on the photo before it commits to its measurements. Each zoom is a full-resolution crop of part of the rack, sent back to the model as another image, with another round of thinking. This is the <strong>single biggest lever</strong> on both the bill and the wait, and the Cost per score footing moves as you change it. It works on all three engines, and it is one setting shared between them, so a buck scored on each is scored the same way.</p>
+              <ul>
+                <li><strong>Off</strong> — the default. One pass. Cheapest and fastest. Tine tips and the far side are judged from the overview alone.</li>
+                <li><strong>2</strong> — a couple of checks on the most ambiguous spots. A good economy setting.</li>
+                <li><strong>4</strong> — enough to check both sides and the brow tines.</li>
+                <li><strong>6</strong> — for a difficult photo where you want every doubt run down. Slowest.</li>
+              </ul>
+              <p>The number is a budget, not a requirement. The model often uses fewer than allowed.</p>
+            </div>
+          </div>
+
+          <div class="knob">
+            <div class="name"><b>Measurement prompt</b><span class="where">Scoring · bottom · Edit / Reset / Done</span><span class="def">Default: the app's tested prompt</span></div>
+            <div class="body">
+              <p>The instructions the model is given for how to measure a rack. The box shows the first few lines. Tap it, or tap <strong>Edit</strong>, to open the full text. Changes save when you tap <strong>Done</strong> or leave the tab. <strong>Reset</strong> puts the original back, and an <strong>Edited</strong> tag shows whenever the text differs from the original. There is one prompt, and every engine is told the same thing word for word.</p>
+              <p><strong>Most people should never touch this.</strong> It is here for anyone curious enough to experiment. The answer format is fixed by the app outside this text, so an edit cannot break scoring, but it can certainly make it worse. If you have experimented and results look odd, or a company starts rejecting requests as invalid, tap Reset.</p>
+            </div>
+          </div>
+
+          <div class="knob">
+            <div class="name"><b>Cost per score</b><span class="where">Scoring · pinned at the bottom · tap to expand</span></div>
+            <div class="body">
+              <p>Two figures in US dollars for the current engine, model, image size, prompt and Look-closer budget, at the company's published list prices:</p>
+              <ul>
+                <li><strong>Typically about</strong> — what a one-photo score usually comes to. On Claude Opus 5 with Look closer off, that is around five cents.</li>
+                <li><strong>Up to</strong> — the most one score is allowed to bill. It assumes every request is used and every reply runs as long as the company permits, which almost never happens. The app stops a run before it can spend more than this. On the same settings it is a little over ninety cents.</li>
+              </ul>
+              <p>Tap the footing to see the arithmetic: photo tokens, prompt tokens, zoom crops, the number of requests, the output cap and the rate, and what the ceiling becomes with three photos. The rates are a snapshot built into the app, not a live feed, so treat the numbers as a guide and check your account's usage page for the real bill.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Keys tab</h3>
+        <div class="knobs">
+          <div class="knob">
+            <div class="name"><b>Account blocks</b><span class="where">Keys · one per company</span></div>
+            <div class="body">
+              <p>Claude, ChatGPT and Gemini each get a block with a status tag on the right:</p>
+              <ul>
+                <li><strong>Scoring with this</strong> — has a key and is the engine picked under Scoring.</li>
+                <li><strong>Ready</strong> — has a key, waiting for when you switch to it.</li>
+                <li><strong>Picked, no key</strong> — chosen under Scoring but cannot score yet.</li>
+                <li><strong>No key</strong> — nothing set. That is fine. You only need one.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>API key</b><span class="where">Keys · each block</span></div>
+            <div class="body">
+              <p>Labelled Anthropic API key, OpenAI API key or Google AI API key. Covered in Chapter 5. Stored in the phone's encrypted keychain and shown masked. <strong>Add</strong> or <strong>Edit</strong> opens the field, with <strong>Save key</strong>, <strong>Cancel</strong> and, for a saved key, <strong>Delete</strong>. <strong>Copy</strong> clears from the clipboard after 60 seconds.</p>
+            </div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>Test</b><span class="where">Keys · each saved key</span></div>
+            <div class="body">
+              <p>Asks the company whether the key still works on the model you have picked, for a fraction of a cent. Worth doing before a hunt: a revoked key or an account that has run out of credit looks exactly like a working setup until a buck is standing in the frame. The verdict says which it is, with a <strong>Show detail</strong> link for the company's exact words.</p>
+            </div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>How to obtain an API key · How to add funds</b><span class="where">Keys · folded under each block</span></div>
+            <div class="body"><p>The short version of Chapter 4 for that company, ending with the web address and a Copy button.</p></div>
+          </div>
+        </div>
+
+        <h3>General tab</h3>
+        <div class="knobs">
+          <div class="knob">
+            <div class="name"><b>Display name</b><span class="where">General</span><span class="def">Default: Not set</span></div>
+            <div class="body"><p>Optional. A name to put on scores you share. It is stored only on the phone and is never sent to the AI company.</p></div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>Distance units</b><span class="where">General</span><span class="def">Default: Yards</span></div>
+            <div class="body"><p>Yards or Meters. Sets the unit the distance row on the Score tab starts in. Set it to whatever your rangefinder reads in so you never have to convert. It makes no difference to accuracy.</p></div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>Save photos to album</b><span class="where">General</span><span class="def">Default: Ask</span></div>
+            <div class="body">
+              <p>Whether photos you shoot inside Sidewinder are also saved to your phone's photo library. Sidewinder keeps its own copy for History either way.</p>
+              <ul>
+                <li><strong>Always</strong> — every shot lands in your photo library.</li>
+                <li><strong>Ask each time</strong> — the app asks once, the first time you shoot, and remembers your answer here.</li>
+                <li><strong>Never</strong> — shots stay inside the app only.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>Privacy</b><span class="where">General</span></div>
+            <div class="body"><p><strong>How your photos are used</strong> reopens the first-launch summary from Chapter 3. <strong>Privacy policy</strong> is the full text. <strong>Open-source licenses</strong> lists the software the app is built with.</p></div>
+          </div>
+          <div class="knob">
+            <div class="name"><b>Version</b><span class="where">General · bottom</span></div>
+            <div class="body"><p>The line at the very bottom, for example <code>SIDEWINDER 1.0.0 (5)</code>. Quote it when reporting a problem.</p></div>
+          </div>
+        </div>
+
+        <h3>Recommended starting settings</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Setting</th><th>Best accuracy</th><th>Balanced (default)</th><th>Cheapest</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Scoring engine</td><td>Claude</td><td>Claude</td><td>Gemini</td></tr>
+              <tr><td class="k">Model</td><td>Claude Opus 5</td><td>Claude Opus 5</td><td>Gemini 3.8 Flash</td></tr>
+              <tr><td class="k">Max image size</td><td class="m">1568 px</td><td class="m">1568 px</td><td class="m">3072 px (no saving from lowering it)</td></tr>
+              <tr><td class="k">Look closer</td><td class="m">4 or 6</td><td class="m">Off</td><td class="m">Off</td></tr>
+              <tr><td class="k">Photos per buck</td><td class="m">2–3</td><td class="m">1–2</td><td class="m">1</td></tr>
+              <tr><td class="k">Distance</td><td>Ranged</td><td>Ranged if you have it</td><td>Estimated is fine</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ 8 -->
+    <section class="page" id="reading" data-title="Reading a score" data-short="Scores">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 8</span>
+        <h2>What the numbers mean</h2>
+        <p class="lede">A short primer on Boone &amp; Crockett typical scoring, so the Breakdown page reads like a score sheet and not a spreadsheet. The app has a longer version, with a labelled antler diagram, under "How B&amp;C scoring works".</p>
+      </div>
+
+      <div class="prose">
+        <p>Boone &amp; Crockett scores a typical whitetail by adding up a fixed set of measurements, then subtracting how far the two sides differ. Everything is measured to the nearest eighth of an inch and written that way: 153 0/8", never 153.0.</p>
+
+        <div class="tablewrap wide">
+          <table>
+            <thead><tr><th>Measurement</th><th>Written as</th><th>What it is</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Inside spread</td><td class="m">D</td><td>The widest gap between the main beams, at a right angle to the skull. Credited only up to the length of the longer beam.</td></tr>
+              <tr><td class="k">Main beam</td><td class="m">F</td><td>From the lowest outside edge of the burr, along the outer curve, to the tip. One per side.</td></tr>
+              <tr><td class="k">Normal points (tines)</td><td class="m">G1, G2, G3…</td><td>Each point rising off the top of the beam, tip down to where it meets the beam. G1 is the brow tine, then outward.</td></tr>
+              <tr><td class="k">Circumferences (mass)</td><td class="m">H1 – H4</td><td>Girth of the beam at four places per side: the narrowest spot between the burr and G1, then between each pair of tines.</td></tr>
+              <tr><td class="k">Abnormal points</td><td class="m">—</td><td>Points growing anywhere other than the top of the beam, or off another point. Deducted for a typical score, added for a non-typical one.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Putting it together</h3>
+        <ul>
+          <li><strong>Gross</strong> = spread + both beams + every normal point + all eight circumferences.</li>
+          <li><strong>Deductions</strong> = for each beam, tine and circumference, the difference between left and right, all added up, plus any abnormal points.</li>
+          <li><strong>Net</strong> = Gross − Deductions.</li>
+        </ul>
+        <p>That is why net is always lower than gross: B&amp;C rewards symmetry, and every eighth of an inch one side out-measures the other comes off. Hunters usually talk in gross. Record books use net: 160" for the Awards book, 170" for the All-time book.</p>
+
+        <h3>What counts as a point</h3>
+        <p>A projection is a point when it is at least one inch long and longer than it is wide at one inch of length. Beam tips count as points but are not measured as tines. A 10-point buck is written 5 × 5.</p>
+
+        <h3>About the tolerance</h3>
+        <p>The ± figure next to the score is the model's honest range. It is judged against the headline score, not against any single tine. Five inches off on a 140-inch buck is a good estimate. Five inches off on a brow tine would not be, but that error rarely survives into the total. Trust a score more when the confidence is high, the distance was ranged rather than estimated, and you gave it more than one angle.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ 9 -->
+    <section class="page" id="help" data-title="Troubleshooting" data-short="Help">
+      <div class="page-head">
+        <span class="eyebrow">Chapter 9</span>
+        <h2>When something goes wrong</h2>
+        <p class="lede">The messages you are most likely to see, what they mean, and what to do. A failed key test also has a Show detail link with the company's exact words.</p>
+      </div>
+
+      <div class="prose">
+        <div class="faq">
+          <details>
+            <summary>"No Anthropic API key set — add one in Settings" (or OpenAI, or Google AI)</summary>
+            <div class="a"><p>The engine picked under Settings → Scoring has no key. Either add one on the Keys tab (Chapter 5), or switch Scoring engine to the one you did add a key for.</p></div>
+          </details>
+          <details>
+            <summary>"That API key was rejected"</summary>
+            <div class="a"><p>The key was pasted short or has been revoked. Go to Settings → Keys, tap Edit on that key, paste it again, save, and tap Test. If you no longer have it, make a new key on the company's website and delete the old one there.</p></div>
+          </details>
+          <details>
+            <summary>"Your account is out of API credit"</summary>
+            <div class="a"><p>The key is fine but there is no money behind it, so the photo was never scored. Log in to that company's website (console.anthropic.com, platform.openai.com, or aistudio.google.com) and add credit, then tap Retry. Remember that API billing is separate from a Claude.ai, ChatGPT Plus or Google One subscription.</p></div>
+          </details>
+          <details>
+            <summary>"That key is not permitted to make this request" or "cannot reach the model"</summary>
+            <div class="a"><p>The key is real but is shut out of the model the app is set to use. Restricted or project-scoped keys do this, and new accounts sometimes need billing set up before the larger models open up. Make a key with full access, or pick a smaller model under Settings → Scoring → Model.</p></div>
+          </details>
+          <details>
+            <summary>Every Claude Fable 5.1 request fails, but Opus 5 works</summary>
+            <div class="a"><p>Your Anthropic organization is on zero data retention, which Fable 5.1 does not support. Switch the Model back to Claude Opus 5, or ask Anthropic to move the organization to standard 30-day retention.</p></div>
+          </details>
+          <details>
+            <summary>"You are sending requests faster than this account allows"</summary>
+            <div class="a"><p>A rate limit. Wait a few seconds and tap Retry. Free-tier Gemini keys hit this soonest, and have a daily cap that resets the next day.</p></div>
+          </details>
+          <details>
+            <summary>"…is overloaded right now" or "hit a server error on their end"</summary>
+            <div class="a"><p>The company is having trouble. Nothing is wrong with your key or your photo. Wait a moment and tap Retry. If it keeps happening it is an outage, and switching Scoring engine to another company you have a key for will get you a score in the meantime.</p></div>
+          </details>
+          <details>
+            <summary>"The photo is too large"</summary>
+            <div class="a"><p>Lower Max image size under Settings → Scoring and tap Retry.</p></div>
+          </details>
+          <details>
+            <summary>"Rejected the request as invalid"</summary>
+            <div class="a"><p>If you have edited the measurement prompt, that is the first thing to suspect. Settings → Scoring → Measurement prompt → Edit → Reset.</p></div>
+          </details>
+          <details>
+            <summary>"The model garbled its answer — trying once more"</summary>
+            <div class="a"><p>Nothing to do. The model returned something the app could not read, and it retries automatically. If it fails twice you get a Retry button. Trying a different photo or a bigger model usually clears it.</p></div>
+          </details>
+          <details>
+            <summary>"Camera access is off for Sidewinder"</summary>
+            <div class="a"><p>Open your phone's Settings app → scroll to Sidewinder → turn on Camera. You can still score photos from your library without it.</p></div>
+          </details>
+          <details>
+            <summary>The "Bring your own key" screen keeps coming back</summary>
+            <div class="a"><p>It returns on every launch until at least one key is saved. If you skipped it, add a key there or under Settings → Keys and it will stop.</p></div>
+          </details>
+          <details>
+            <summary>The distance field did not fill in from my rangefinder photo</summary>
+            <div class="a"><p>Reading the readout is best-effort. It needs the number and its unit to be legible in the frame. Just type the distance in. A typed number always wins over a detected one.</p></div>
+          </details>
+          <details>
+            <summary>The score seems way off</summary>
+            <div class="a">
+              <p>Open the Breakdown and look at Scale &amp; distance first. A wrong distance throws every measurement in the same direction. Then check which tine measurements look wrong. Common causes: the far side of the rack hidden behind the near side, a brow tine confused with a G2, or a photo taken with digital zoom on another camera.</p>
+              <p>Things that help: a second photo from a different angle, a ranged distance, Look closer at 4 or 6, and image size at the ceiling. Then send the Breakdown as feedback so the developer can see it.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How much is this costing me?</summary>
+            <div class="a"><p>The Cost per score footing on Settings → Scoring shows a typical figure and a ceiling for one photo, and, expanded, the ceiling for three. For the real number, each company has a usage page on its website. Prepaid credit means you can never be charged more than you put in.</p></div>
+          </details>
+          <details>
+            <summary>TestFlight says the build has expired</summary>
+            <div class="a"><p>Open TestFlight and install the newest build. If there is none listed, ask the person who invited you for a new one. Your keys and history survive an update.</p></div>
+          </details>
+          <details>
+            <summary>I got a new phone</summary>
+            <div class="a"><p>Install Sidewinder again. There is no account, so nothing carries over on its own: History lives on the old phone, and so do your API keys. Paste the keys in again on the new one. If you did not keep a copy, make new keys on the company's website.</p></div>
+          </details>
+        </div>
+
+        <h3>Before you ask for help</h3>
+        <ul class="check">
+          <li>Which engine, model and Look-closer setting you were using.</li>
+          <li>The exact error text, or a screenshot of the Breakdown page. Never send your API key.</li>
+          <li>The app version from the bottom of Settings → General.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="pager">
+      <button class="prev" id="prev"><span class="label">Previous</span><span id="prevTitle"></span></button>
+      <button class="next" id="next"><span class="label">Next</span><span id="nextTitle"></span></button>
+    </div>
+  </main>
+</div>
+
+<script src="guide.js"></script>
+</body>
+</html>
