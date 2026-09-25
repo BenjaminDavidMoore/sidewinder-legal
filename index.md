@@ -1,6 +1,6 @@
 # Sidewinder privacy policy
 
-_Effective 09/17/2026 · Version 1.0_
+_Effective 09/25/2026 · Version 1.1_
 
 This policy describes what the Sidewinder app does with information, who receives it, and the choices you have. Sidewinder is published by G&R Outdoors ("we", "us"), 200 El Capitan Loop, Dripping Springs, TX 78620. Questions go to grshavor@icloud.com. The current version of this policy is also published at https://benjamindavidmoore.github.io/sidewinder-legal/.
 
@@ -14,33 +14,34 @@ This policy describes what the Sidewinder app does with information, who receive
 ## Information the app handles
 
 - Photos. Photos that are taken with your camera inside the app or that you pick from your photo library. The photos are sent to the AI provider you select, downscaled to that engine's working size, and stored in your on-device history alongside the result.
-- Distance. The distance you enter, or the distance read from a rangefinder visible in your photo. Reading the rangefinder happens entirely on the device using Apple Vision on iPhone and Google ML Kit on Android.
-- API keys. You must enter the API key from your phone into Settings for each AI engine. The API key is in iOS Keychain or Android Keystore. The API key is not shared with Sidewinder or shared outside the AI engine.
-- Display name. You have the option of including your phone's Display name on the scores you choose to share from the app.
+- Distance. The distance you enter, or the distance read from a rangefinder visible in your photo. Reading the rangefinder happens entirely on the device, using the phone's built-in text recognition.
+- API keys. You enter one API key, for the AI provider you use, in Settings. It is stored in the phone's secure keychain and sent only to that provider, in the request that scores a photo. It is never sent to us or to anyone else.
+- Display name. Optional. Shown on the scores you choose to share from the app. Stored only on the device.
 - Preferences. Distance units, album preference, selected engine and model, and similar settings. Stored only on the device.
 - Scoring history. Each photo, distance, score, and any other raw exchange you enter on the app or exchange with the AI engine is stored only on your phone/device. You may delete any entry from the History tab.
+
 ## Who receives your photos
 
-When you tap Score, the photo, the distance, and the measurement instructions go directly from your phone to one of these AI providers:
+When you tap Score, the photo, the distance, and the measurement instructions go directly from your phone to the AI provider selected in Settings. Only that provider receives anything:
 
 - Anthropic (Claude), api.anthropic.com. Privacy policy: https://www.anthropic.com/privacy
 - OpenAI (ChatGPT), api.openai.com. Privacy policy: https://openai.com/policies/privacy-policy
 - Google (Gemini), generativelanguage.googleapis.com. Privacy policy: https://policies.google.com/privacy
 
-Each provider processes what you send under its own terms and may retain it for a period for abuse monitoring and safety. You are that provider's customer for these requests, and the AI provider's terms govern retention and use.
+Each provider processes what you send under its own terms and may retain it for a period for abuse monitoring and safety. You are that provider's customer for these requests, and the AI provider's terms govern retention and use. We never see the request or the response.
 
 ## What we do not do
 
 - Sidewinder does not collect, store, or have access to your photos, distances, results, keys or name.
 - Sidewinder does not use analytics, crash reporting, advertising identifiers, or any form of tracking.
 - Sidewinder does not sell or share personal information.
-- Sidewinder does not knowingly collect information from children under 13.
+- Sidewinder is not directed to children under 13 and does not knowingly collect information from them.
 
 ## Device permissions
 
 - Camera. To photograph a buck inside the app, you must grant permission to access the camera. Permission is requested the first time you open the Score tab, after you have read the disclosure.
-- Photo library. To pick an existing photo from your phone to score, iOS and Android both use the system picker. Sidewinder only sees the photo you choose.
-- Photo library. You may choose to save a photo you took in the app to your album.
+- Photo library, read. To pick an existing photo from your phone to score, the app uses the system photo picker. Sidewinder only sees the photo you choose.
+- Photo library, add. You may choose to save a photo you took in the app to your album.
 
 ## Retention and deletion
 
@@ -67,9 +68,10 @@ Sidewinder is built with open-source software. The full license text of every co
 
 - Flutter and Dart, BSD 3-Clause. Google LLC.
 - camera, image_picker, path_provider, shared_preferences, package_info_plus, http, image, flutter_secure_storage, gal: Dart packages under BSD, MIT or Apache 2.0 licenses, listed in the app.
-- Google ML Kit Text Recognition (Android only), used on-device to read rangefinder displays. Google APIs Terms of Service.
-- Apple Vision framework (iOS only), used on-device to read rangefinder displays. Apple SDK license.
+- Google ML Kit Text Recognition, used on-device to read rangefinder displays. Google APIs Terms of Service.
+- Apple Vision framework, used on-device to read rangefinder displays. Apple SDK license.
 - Besley, Archivo and Courier Prime typefaces, SIL Open Font License 1.1.
+
 Sidewinder uses no Anthropic, OpenAI or Google software in the app itself; it calls their public HTTP APIs with the key you provide.
 
 ## Changes to this policy
