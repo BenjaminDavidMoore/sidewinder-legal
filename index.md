@@ -15,7 +15,7 @@ This policy describes what the Sidewinder app does with information, who receive
 
 - Photos. Photos that are taken with your camera inside the app or that you pick from your photo library. The photos are sent to the AI provider you select, downscaled to that engine's working size, and stored in your on-device history alongside the result.
 - Distance. The distance you enter, or the distance read from a rangefinder visible in your photo. Reading the rangefinder happens entirely on the device, using the phone's built-in text recognition.
-- API keys. You enter one API key, for the AI provider you use, in Settings. It is stored in the phone's secure keychain and sent only to that provider, in the request that scores a photo. It is never sent to us or to anyone else.
+- API keys. You enter one API key, for the AI provider you use, in Settings. It is stored in the phone's secure keychain and sent only to that provider, in the request that scores a photo. It is never sent to Sidewinder or to anyone else.
 - Display name. Optional. Shown on the scores you choose to share from the app. Stored only on the device.
 - Preferences. Distance units, album preference, selected engine and model, and similar settings. Stored only on the device.
 - Scoring history. Each photo, distance, score, and any other raw exchange you enter on the app or exchange with the AI engine is stored only on your phone/device. You may delete any entry from the History tab.
