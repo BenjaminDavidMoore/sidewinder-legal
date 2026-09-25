@@ -1,12 +1,13 @@
 # Sidewinder privacy policy
 
-_Effective 09/25/2026 · Version 1.1_
+_Effective 09/25/2026 · Version 1.2_
 
 This policy describes what the Sidewinder app does with information, who receives it, and the choices you have. Sidewinder is published by G&R Outdoors ("we", "us"), 200 El Capitan Loop, Dripping Springs, TX 78620. Questions go to grshavor@icloud.com. The current version of this policy is also published at https://benjamindavidmoore.github.io/sidewinder-legal/.
 
 ## The short version
 
-- Sidewinder has no account, no sign-in, no analytics, no advertising and no server of its own.
+- Sidewinder has no account, no sign-in, no advertising, no server of its own and no analytics of its own.
+- On Android, the Google ML Kit text recognizer that reads a rangefinder display reports diagnostic and usage data about itself to Google. What it sends is listed under Third-party software below.
 - To score a buck, the app sends your photo and the distance you enter directly from your phone to the AI provider you choose: Anthropic, OpenAI or Google. The AI provider processes it under its own privacy policy.
 - You supply your own API key for that provider. The API key is stored in your phone's secure keychain, and sent only to the AI provider of your choice.
 - Everything else, including your scoring history and photos, stays on your phone, and is deleted when you delete it or uninstall the app.
@@ -16,7 +17,6 @@ This policy describes what the Sidewinder app does with information, who receive
 - Photos. Photos that are taken with your camera inside the app or that you pick from your photo library. The photos are sent to the AI provider you select, downscaled to that engine's working size, and stored in your on-device history alongside the result.
 - Distance. The distance you enter, or the distance read from a rangefinder visible in your photo. Reading the rangefinder happens entirely on the device, using the phone's built-in text recognition.
 - API keys. You enter one API key, for the AI provider you use, in Settings. It is stored in the phone's secure keychain and sent only to that provider, in the request that scores a photo. It is never sent to Sidewinder or to anyone else.
-- Display name. Optional. Shown on the scores you choose to share from the app. Stored only on the device.
 - Preferences. Distance units, album preference, selected engine and model, and similar settings. Stored only on the device.
 - Scoring history. Each photo, distance, score, and any other raw exchange you enter on the app or exchange with the AI engine is stored only on your phone/device. You may delete any entry from the History tab.
 
@@ -32,8 +32,9 @@ Each provider processes what you send under its own terms and may retain it for 
 
 ## What we do not do
 
-- Sidewinder does not collect, store, or have access to your photos, distances, results, keys or name.
+- Sidewinder does not collect, store, or have access to your photos, distances, results or keys.
 - Sidewinder does not use analytics, crash reporting, advertising identifiers, or any form of tracking.
+- Sidewinder does not use crash reporting, advertising identifiers, or any form of tracking, and runs no analytics of its own. The only usage data that leaves the phone is the Google ML Kit diagnostic data described under Third-party software.
 - Sidewinder does not sell or share personal information.
 - Sidewinder is not directed to children under 13 and does not knowingly collect information from them.
 
@@ -68,11 +69,11 @@ Sidewinder is built with open-source software. The full license text of every co
 
 - Flutter and Dart, BSD 3-Clause. Google LLC.
 - camera, image_picker, path_provider, shared_preferences, package_info_plus, http, image, flutter_secure_storage, gal: Dart packages under BSD, MIT or Apache 2.0 licenses, listed in the app.
-- Google ML Kit Text Recognition, used on-device to read rangefinder displays. Google APIs Terms of Service.
-- Apple Vision framework, used on-device to read rangefinder displays. Apple SDK license.
+- Google ML Kit Text Recognition, used on-device to read rangefinder displays. Google APIs Terms of Service. The text it reads never leaves the phone. The ML Kit library itself reports to Google, over HTTPS: the phone's manufacturer, model and OS version; the app's package name and version; performance metrics such as latency; its configuration, such as image size; event types and error codes; and a per-installation identifier that Google says is not intended to identify you or your phone. Google uses this for diagnostics and usage analytics and states that it does not pass it to third parties. It cannot be switched off separately from the rangefinder-reading feature.
+- Apple Vision framework, used on-device to read rangefinder displays. Apple SDK license. Nothing it reads leaves the phone.
 - Besley, Archivo and Courier Prime typefaces, SIL Open Font License 1.1.
 
-Sidewinder uses no Anthropic, OpenAI or Google software in the app itself; it calls their public HTTP APIs with the key you provide.
+The scoring engines are reached over Anthropic's, OpenAI's and Google's public HTTP APIs with the key you provide; none of their scoring SDKs is embedded in the app.
 
 ## Changes to this policy
 
